@@ -7,5 +7,13 @@ package jp.ac.hec.cm0107.iot_android;
 //data3: null,
 //create_time: "2023-07-13 11:12:02"
 public class IoTItem {
+    private int id;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }
