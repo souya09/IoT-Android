@@ -18,8 +18,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button deleteButton = findViewById(R.id.delete_button);
-
         startActivity(new Intent(MainActivity.this, OverlayShowActivity.class));
 
     }

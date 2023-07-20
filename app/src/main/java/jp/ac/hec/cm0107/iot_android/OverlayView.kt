@@ -3,6 +3,7 @@ package jp.ac.hec.cm0107.iot_android
 import android.content.Context
 import android.graphics.PixelFormat
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.widget.FrameLayout
