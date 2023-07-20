@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">IoT-Android</string>
+    <string name="title_activity_overlay_show">OverlayShowActivity</string>
 </resources>
