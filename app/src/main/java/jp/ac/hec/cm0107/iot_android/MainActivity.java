@@ -22,30 +22,5 @@ public class MainActivity extends AppCompatActivity {
 
         startActivity(new Intent(MainActivity.this, OverlayShowActivity.class));
 
-        deleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // ファイルディレクトリのパスを取得
-                File fileDir = getExternalFilesDir(null);
-
-                // ファイルディレクトリ内のすべてのファイルを削除
-                if (fileDir != null) {
-                    deleteDataRecursive(fileDir);
-                }
-            }
-        });
-    }
-
-    // 再帰的にディレクトリ内のファイルやサブディレクトリを削除する
-    private void deleteDataRecursive(File fileOrDirectory) {
-        if (fileOrDirectory.isDirectory()) {
-            File[] children = fileOrDirectory.listFiles();
-            if (children != null) {
-                for (File child : children) {
-                    deleteDataRecursive(child);
-                }
-            }
-        }
-        fileOrDirectory.delete();
     }
 }
