@@ -8,7 +8,7 @@ package jp.ac.hec.cm0107.iot_android;
 //create_time: "2023-07-13 11:12:02"
 public class IoTItem {
     private int id;
-    private String item_id;
+    private String team_id;
     private double data1;
     private double data2;
     private double data3;
@@ -22,12 +22,12 @@ public class IoTItem {
         this.id = id;
     }
 
-    public String getItem_id() {
-        return item_id;
+    public String getTeam_id() {
+        return team_id;
     }
 
-    public void setItem_id(String item_id) {
-        this.item_id = item_id;
+    public void setTeam_id(String team_id) {
+        this.team_id = team_id;
     }
 
     public double getData1() {

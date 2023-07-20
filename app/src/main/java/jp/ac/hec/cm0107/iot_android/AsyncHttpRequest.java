@@ -17,6 +17,8 @@ import java.util.Date;
 import java.util.Locale;
 import javax.net.ssl.HttpsURLConnection;
 
+// https://app-cm-jec.lolipop.io/iot/getJson.php?param=CM08
+
 public class AsyncHttpRequest implements Runnable {
     private Handler handler;
     private MainActivity mainActivity;
