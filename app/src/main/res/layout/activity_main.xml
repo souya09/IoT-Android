@@ -8,14 +8,17 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/txtDesc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:gravity="center"
+        android:text="現在、監視中ではありません"
+        android:textSize="50dp" />
 
     <Button
-        android:id="@+id/delete_button"
+        android:id="@+id/start_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button" />
+        android:text="監視をスタート" />
 
 </LinearLayout>
