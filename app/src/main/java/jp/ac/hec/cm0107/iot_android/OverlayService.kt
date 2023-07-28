@@ -4,7 +4,6 @@ import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.os.Build
-import android.util.Log
 
 /**
  * A foreground service for managing the life cycle of overlay view.
@@ -38,8 +37,6 @@ class OverlayService : Service() {
     override fun onCreate() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             // Start as a foreground service
-            val notification = MyNotification.build(this)
-            startForeground(1, notification)
         }
         overlayView = OverlayView.create(this)
     }
