@@ -3,7 +3,6 @@ package jp.ac.hec.cm0107.iot_android
 import android.content.Context
 import android.graphics.PixelFormat
 import android.util.AttributeSet
-import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.widget.FrameLayout
@@ -25,9 +24,8 @@ class OverlayView @JvmOverloads constructor(
     /** Settings for overlay view */
     private val layoutParams = WindowManager.LayoutParams(
         WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,  // Overlay レイヤに表示
-        WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE  // フォーカスを奪わない
+        WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE.inv()// フォーカスを奪わない
                 or WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
-                or WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
                 or WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,  // 画面外への拡張を許可
         PixelFormat.TRANSLUCENT
     )
@@ -36,6 +34,9 @@ class OverlayView @JvmOverloads constructor(
     @Synchronized
     fun show() {
         if (!this.isShown) {
+            layoutParams.flags =
+                layoutParams.flags or WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN or
+                        WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
             windowManager.addView(this, layoutParams)
         }
     }
