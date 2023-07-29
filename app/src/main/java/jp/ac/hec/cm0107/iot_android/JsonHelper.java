@@ -53,7 +53,7 @@ public class JsonHelper {
  * }
  * ]
  */
-        item.setId(json.getInt("Id"));
+        item.setId(json.getInt("id"));
         item.setTeam_id(json.getString("team_id"));
         item.setData1(json.getDouble("data1"));
         item.setData2(json.getDouble("data2"));
