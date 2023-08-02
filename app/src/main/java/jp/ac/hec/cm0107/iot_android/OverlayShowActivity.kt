@@ -31,13 +31,11 @@ class OverlayShowActivity : AppCompatActivity() {
         requestOverlayPermission()
 
         // Show/hide overlay view with a toggle button.
-        findViewById<ToggleButton>(R.id.toggle_button).apply {
-            isChecked = OverlayService.isActive
-            setOnCheckedChangeListener { _, isChecked ->
-                if (isChecked) OverlayService.start(this@OverlayShowActivity)
-                else OverlayService.stop(this@OverlayShowActivity)
-            }
-        }
+
+
+        OverlayService.start(this@OverlayShowActivity)
+
+
     }
 
     /** Requests an overlay permission to the user if needed. */

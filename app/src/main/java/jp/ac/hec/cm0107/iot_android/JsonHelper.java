@@ -6,16 +6,16 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
+import java.util.Stack;
 
 //TODO : URL -> 処理を実装　動作チェック
 public class JsonHelper {
 
     static String pubDate;
 
-    public static ArrayList<IoTItem> parseJson (String strJson) {
+    public static Stack<IoTItem> parseJson (String strJson) {
 
-        ArrayList<IoTItem> charaItemArrayList = new ArrayList<>();
+        Stack<IoTItem> charaItemArrayList = new Stack<>();
         try{
             JSONArray entries = new JSONArray(strJson);
             for(int i = 0; i < entries.length();i++) {

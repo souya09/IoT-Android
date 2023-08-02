@@ -1,20 +1,17 @@
 package jp.ac.hec.cm0107.iot_android;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.util.Log;
-import android.widget.ListView;
-import android.widget.TextView;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
+import java.util.Stack;
+
 import javax.net.ssl.HttpsURLConnection;
 
 // https://app-cm-jec.lolipop.io/iot/getJson.php?param=CM08
@@ -79,29 +76,15 @@ public class AsyncHttpRequest implements Runnable {
 
 //
     private void onPostExecute() {
-//        Log.i("RssReader", "onPostExecute start...");
-//        // 非同期処理後に実行する処理を記述する
-//        ArrayList<IoTItem> ary = JsonHelper.parseJson(resStr);
-//        for (IoTItem tmp : ary) {
-//            mainActivity.adapter.add(tmp);
-//        }
-//        ListView list = mainActivity.findViewById(R.id.resultList);
-//
-//        list.setAdapter(mainActivity.adapter);
-//
-//        TextView txt = mainActivity.findViewById(R.id.textTime);
-//        String str = JsonHelper.pubDate;
-//
-//        SimpleDateFormat sdf =new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss", Locale.ENGLISH);
-//        try {
-//            Date date = sdf.parse(str);
-//            String dateToString = simpleDateFormat.format(date);
-//            txt.setText(dateToString);
-//        } catch (ParseException e) {
-//            throw new RuntimeException(e);
-//        }
-//
-//
+        Log.i("RssReader", "onPostExecute start...");
+        // 非同期処理後に実行する処理を記述する
+        Stack<IoTItem> ary = JsonHelper.parseJson(resStr);
+        double lastData = ary.lastElement().getData1();
+        Log.i("lastItem", String.valueOf(lastData));
+        if (lastData == 4.0) {
+            Intent intent = new Intent(mainActivity.getApplicationContext(),OverlayShowActivity.class);
+            mainActivity.startActivity(intent);
+        }
     }
 
 }

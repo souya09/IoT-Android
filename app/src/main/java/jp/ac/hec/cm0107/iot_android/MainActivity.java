@@ -1,48 +1,44 @@
 package jp.ac.hec.cm0107.iot_android;
 
 
-    import androidx.appcompat.app.AppCompatActivity;
-    import androidx.core.os.HandlerCompat;
+import android.net.Uri;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.util.Log;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.os.HandlerCompat;
 
-    import android.net.Uri;
-    import android.os.Bundle;
-    import android.os.Handler;
-    import android.os.Looper;
-    import android.util.Log;
-    import android.widget.Button;
-    import android.widget.TextView;
-    import android.widget.Toast;
-
-    import java.util.concurrent.ExecutorService;
-    import java.util.concurrent.Executors;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 
 
 public class MainActivity extends AppCompatActivity {
     private ExecutorService executorService;
     private Handler handler;
-    private static final long INTERVAL = 30 * 1000; // 1分（1分 = 60秒 * 1000ミリ秒）
+    private static final long INTERVAL = 5 * 1000; // 1分（1分 = 60秒 * 1000ミリ秒）
 
-    private Handler  subHandler = new Handler();
-    private Runnable runnable = new Runnable() {
-        @Override
-        public void run() {
-            subHandler.postDelayed(this, INTERVAL);
-            Toast.makeText(MainActivity.this, "run", Toast.LENGTH_SHORT).show();
-            new UriBuild();
-        }
-    };
+    private Handler  subHandler;
+    private Runnable runnable;
     @Override
     protected void onResume() {
         super.onResume();
-        subHandler.postDelayed(runnable, INTERVAL);
+        if (subHandler != null) {
+            subHandler.postDelayed(runnable, INTERVAL);
+        }
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        subHandler.removeCallbacks(runnable);
+        if (subHandler != null) {
+            subHandler.removeCallbacks(runnable);
+        }
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,12 +49,20 @@ public class MainActivity extends AppCompatActivity {
         btnStart.setOnClickListener(v -> {
             TextView txtDesc = findViewById(R.id.txtDesc);
             txtDesc.setText("現在、監視中です");
+            runnable = new Runnable() {
+                @Override
+                public void run() {
+                    subHandler = new Handler();
+                    new UriBuild();
+                    subHandler.postDelayed(this, INTERVAL);
+                }
+            };
+            new Handler().postDelayed(runnable, INTERVAL);
         });
 
         Looper mainLooper = getMainLooper();
         handler = HandlerCompat.createAsync(mainLooper);
         executorService = Executors.newSingleThreadExecutor();
-        new UriBuild();
     }
 
     private class UriBuild {
@@ -72,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
             uriBuilder.appendQueryParameter("param", "CM08");
 
             Log.i("MainActivity", uriBuilder.build().toString());
+            Toast.makeText(MainActivity.this, "run", Toast.LENGTH_SHORT).show();
 
             AsyncHttpRequest asyncHttpRequest =
                     new AsyncHttpRequest(handler, MainActivity.this, uriBuilder.toString());
